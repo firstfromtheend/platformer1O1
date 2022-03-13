@@ -40,7 +40,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""6625e4b4-d852-4c45-9330-4da994a05ab1"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -72,7 +72,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Keyboard"",
                     ""id"": ""f8d0e85c-db4d-424b-aaf6-3d7091a5e2ea"",
-                    ""path"": ""1DAxis"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -81,8 +81,8 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""9f0fe4ce-a550-4380-810d-c3a0bcf44579"",
+                    ""name"": ""Left"",
+                    ""id"": ""b3c52a58-ebfc-4793-ae2e-ccbcfd9867a8"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -92,8 +92,8 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
-                    ""id"": ""80ca3895-c454-43ea-adfc-4e20b30947ef"",
+                    ""name"": ""Right"",
+                    ""id"": ""90b864f7-7301-4831-9c03-ff3ae2851d02"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -105,7 +105,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""D-pad"",
                     ""id"": ""f4985ead-2013-4289-815a-54552d633f5f"",
-                    ""path"": ""1DAxis"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -114,8 +114,8 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""b8e09b28-ad77-4176-81b3-ba18fb0485c4"",
+                    ""name"": ""Left"",
+                    ""id"": ""dedac778-3da4-45c9-bf48-90d3a2126922"",
                     ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -125,8 +125,8 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
-                    ""id"": ""cb8bf593-cac8-4ed8-9a0a-24cb31b5128b"",
+                    ""name"": ""Right"",
+                    ""id"": ""8e080a71-147e-476b-879a-53f56b3192c1"",
                     ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -138,7 +138,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Stick"",
                     ""id"": ""1196a1d1-1e06-41d6-a07b-6cb984961434"",
-                    ""path"": ""1DAxis"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -147,8 +147,8 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""e5a8fb0f-4480-402d-8304-5adaeb6a45a7"",
+                    ""name"": ""Left"",
+                    ""id"": ""4a7edcd2-5814-4f0b-8dd3-1d90e229dea8"",
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -158,8 +158,8 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
-                    ""id"": ""2e5582e3-66e2-42c8-8631-0b1b8c960fdf"",
+                    ""name"": ""Right"",
+                    ""id"": ""62065f84-79f7-4847-8466-8eddbe01b82e"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",

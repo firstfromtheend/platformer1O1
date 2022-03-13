@@ -209,7 +209,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: PlayerJump
+    m_ConditionEvent: PlayerRun
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: PlayerJump
