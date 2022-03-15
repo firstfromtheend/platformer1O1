@@ -11,21 +11,27 @@ public class Controller : MonoBehaviour
 
     private PlayerController playerController;
     private Rigidbody2D playerRB;
-    private GameObject childWithSprite;
+    private Animator playerAnimator;
+
+    [SerializeField] bool onGround;
 
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponent<Animator>();
 
         playerController = new PlayerController();
         playerController.Player.Jump.performed += _ => Jump();
-        playerController.Player.Move.performed += ctx => Move();
-        childWithSprite = this.gameObject.transform.GetChild(0).gameObject;
+        playerController.Player.Move.performed += _ => Move();
     }
 
     private void Jump()
     {
-        playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if (onGround)
+        {
+            playerAnimator.SetBool("PlayerJump", true);
+            playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
 
     private void OnEnable()
@@ -49,13 +55,33 @@ public class Controller : MonoBehaviour
         bool playerMoveRightNow = Mathf.Abs(playerRB.velocity.x) > Mathf.Epsilon;
         if (playerMoveRightNow)
         {
-            childWithSprite.transform.localScale = new Vector2(Mathf.Sign(playerRB.velocity.x), 1f);
+            transform.localScale = new Vector2(Mathf.Sign(playerRB.velocity.x), 1f);
         }
     }
 
     private void Move()
     {
+        bool playerMoveRightNow = Mathf.Abs(playerRB.velocity.x) > Mathf.Epsilon;
+        playerAnimator.SetBool("PlayerRun", playerMoveRightNow);
         float movementInputByX = playerController.Player.Move.ReadValue<Vector2>().x;
         playerRB.velocity = new Vector2(movementInputByX * moveSpeed, playerRB.velocity.y);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            playerAnimator.SetBool("PlayerRun", false);
+            onGround = !onGround;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            onGround = !onGround;
+            playerAnimator.SetBool("PlayerJump", false);
+        }
     }
 }
