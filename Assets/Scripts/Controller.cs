@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Controller : MonoBehaviour
 {
+    //test
     [SerializeField] float jumpForce = 5f;
     [SerializeField] float moveSpeed = 10f;
 
