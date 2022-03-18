@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Controller : MonoBehaviour
 {
-    //test
     [SerializeField] float jumpForce = 5f;
     [SerializeField] float moveSpeed = 10f;
 
@@ -18,8 +17,6 @@ public class Controller : MonoBehaviour
     //colliders
     private BoxCollider2D footBoxCollider;
     private CapsuleCollider2D bodyCapsuleCollider;
-
-    [SerializeField] bool onGround;
 
     private void Awake()
     {
@@ -37,7 +34,7 @@ public class Controller : MonoBehaviour
 
     private void Jump()
     {
-        if (onGround)
+        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             playerAnimator.SetBool("PlayerJump", true);
             playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -77,24 +74,6 @@ public class Controller : MonoBehaviour
         playerAnimator.SetBool("PlayerRun", playerMoveRightNow);
         float movementInputByX = playerController.Player.Move.ReadValue<Vector2>().x;
         playerRB.velocity = new Vector2(movementInputByX * moveSpeed, playerRB.velocity.y);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            playerAnimator.SetBool("PlayerRun", false);
-            onGround = !onGround;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            onGround = !onGround;
-            playerAnimator.SetBool("PlayerJump", false);
-        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
