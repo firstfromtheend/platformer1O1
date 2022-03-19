@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Climbing
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - Background tilemap
   - Climbing
   - Ground
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 
@@ -43,6 +44,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer
+  - name: Ground
     uniqueID: 3447042367
+    locked: 0
+  - name: Ladder
+    uniqueID: 1181567423
+    locked: 0
+  - name: Enemy
+    uniqueID: 969211707
+    locked: 0
+  - name: Bounce
+    uniqueID: 1735012407
     locked: 0
