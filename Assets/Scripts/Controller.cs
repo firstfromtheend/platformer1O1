@@ -16,7 +16,6 @@ public class Controller : MonoBehaviour
 
     //colliders
     private BoxCollider2D footBoxCollider;
-    private CapsuleCollider2D bodyCapsuleCollider;
 
     private void Awake()
     {
@@ -25,20 +24,10 @@ public class Controller : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
 
         footBoxCollider = GetComponent<BoxCollider2D>();
-        bodyCapsuleCollider = GetComponent<CapsuleCollider2D>();
 
         playerController = new PlayerController();
         playerController.Player.Jump.performed += _ => Jump();
         playerController.Player.Move.performed += _ => Move();
-    }
-
-    private void Jump()
-    {
-        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        {
-            playerAnimator.SetBool("PlayerJump", true);
-            playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
     }
 
     private void OnEnable()
@@ -55,8 +44,7 @@ public class Controller : MonoBehaviour
     {
         Move();
         FlipSprite();
-        float movementInputByY = playerController.Player.Move.ReadValue<Vector2>().y;
-        Debug.Log(movementInputByY);
+        ClimbingOnLadders();
     }
 
     private void FlipSprite()
@@ -68,30 +56,47 @@ public class Controller : MonoBehaviour
         }
     }
 
+    private void Jump()
+    {
+        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            playerAnimator.SetBool("PlayerJump", !playerAnimator.GetBool("PlayerJump"));
+            playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
     private void Move()
     {
-        bool playerMoveRightNow = Mathf.Abs(playerRB.velocity.x) > Mathf.Epsilon;
-        playerAnimator.SetBool("PlayerRun", playerMoveRightNow);
+        if (Mathf.Abs(playerRB.velocity.x) > Mathf.Epsilon)
+        {
+            playerAnimator.SetBool("PlayerRun", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("PlayerRun", false);
+        }
         float movementInputByX = playerController.Player.Move.ReadValue<Vector2>().x;
         playerRB.velocity = new Vector2(movementInputByX * moveSpeed, playerRB.velocity.y);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void ClimbingOnLadders()
     {
-        if (collision.gameObject.tag == "Climbing")
+        Debug.Log(footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")));
+        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
         {
-            bool playerClimbRightNow = Mathf.Abs(playerRB.velocity.y) > Mathf.Epsilon;
-            playerAnimator.SetBool("PlayerRun", playerClimbRightNow);
+            if (Mathf.Abs(playerRB.velocity.y) > Mathf.Epsilon)
+            {
+                playerAnimator.SetBool("PlayerClimb", true);
+            }
+            else
+            {
+                playerAnimator.SetBool("PlayerClimb", false);
+            }
             float movementInputByY = playerController.Player.Move.ReadValue<Vector2>().y;
-            Debug.Log(movementInputByY);
             playerRB.velocity = new Vector2(playerRB.velocity.x, movementInputByY * moveSpeed);
             playerRB.gravityScale = 0;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Climbing")
+        else
         {
             playerRB.gravityScale = defaultGravityScale;
         }
