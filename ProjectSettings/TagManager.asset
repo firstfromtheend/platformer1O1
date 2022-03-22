@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Climbing
   - Enemy
+  - Hazards
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Ground tilemap
   - Background tilemap
   - Climbing
-  - 
+  - Hazards
   - Enemy
   - Player
   - 
@@ -55,4 +56,7 @@ TagManager:
     locked: 0
   - name: Bounce
     uniqueID: 1735012407
+    locked: 0
+  - name: Hazards
+    uniqueID: 60897983
     locked: 0

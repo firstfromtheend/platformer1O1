@@ -14,8 +14,10 @@ public class Controller : MonoBehaviour
     private float defaultGravityScale;
     private Animator playerAnimator;
 
+
     //colliders
     private BoxCollider2D footBoxCollider;
+    private CapsuleCollider2D playerBodyCollider;
 
     private void Awake()
     {
@@ -24,6 +26,7 @@ public class Controller : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
 
         footBoxCollider = GetComponent<BoxCollider2D>();
+        playerBodyCollider = GetComponent<CapsuleCollider2D>();
 
         playerController = new PlayerController();
         playerController.Player.Jump.performed += _ => Jump();
@@ -42,9 +45,21 @@ public class Controller : MonoBehaviour
 
     private void FixedUpdate()
     {
+        TriggerPlayerdeath();
         Move();
         FlipSprite();
         ClimbingOnLadders();
+    }
+
+    private void TriggerPlayerdeath()
+    {
+        if (playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")) || playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Hazards")))
+        {
+            playerController.Player.Disable();
+            playerAnimator.SetTrigger("Die");
+            //OnDisable();
+            //Debug.Log("gg wp");
+        }
     }
 
     private void FlipSprite()
@@ -100,4 +115,14 @@ public class Controller : MonoBehaviour
             playerRB.gravityScale = defaultGravityScale;
         }
     }
+
+
+    //just in case another way to desable player movement, can freely delete method below
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Enemy")
+    //    {
+    //        OnDisable();
+    //    }
+    //}
 }
