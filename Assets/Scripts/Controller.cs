@@ -8,6 +8,8 @@ public class Controller : MonoBehaviour
 {
     [SerializeField] float jumpForce = 5f;
     [SerializeField] float moveSpeed = 10f;
+    [SerializeField] GameObject playerBullet;
+    [SerializeField] Transform gun;
 
     private PlayerController playerController;
     private Rigidbody2D playerRB;
@@ -31,6 +33,12 @@ public class Controller : MonoBehaviour
         playerController = new PlayerController();
         playerController.Player.Jump.performed += _ => Jump();
         playerController.Player.Move.performed += _ => Move();
+        playerController.Player.Fire.performed += _ => Fire();
+    }
+
+    private void Fire()
+    {
+        Instantiate(playerBullet, gun.position, transform.rotation);
     }
 
     private void OnEnable()
