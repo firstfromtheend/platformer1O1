@@ -81,7 +81,6 @@ public class Controller : MonoBehaviour
 
     private void ClimbingOnLadders()
     {
-        Debug.Log(footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")));
         if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
         {
             if (Mathf.Abs(playerRB.velocity.y) > Mathf.Epsilon)

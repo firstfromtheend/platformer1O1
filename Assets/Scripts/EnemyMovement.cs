@@ -24,9 +24,9 @@ public class EnemyMovement : MonoBehaviour
         enemyRB.velocity = new Vector2(enemyMovementSpeed, 0f); ;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Ground")
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             enemyMovementSpeed = -enemyMovementSpeed;
