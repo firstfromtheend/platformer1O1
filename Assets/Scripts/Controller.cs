@@ -81,9 +81,12 @@ public class Controller : MonoBehaviour
 
     private void Jump()
     {
-        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground tilemap")))
         {
-            playerAnimator.SetBool("PlayerJump", !playerAnimator.GetBool("PlayerJump"));
+            playerAnimator.SetTrigger("Jump");
+            //playerAnimator.SetBool("PlayerJump", !playerAnimator.GetBool("PlayerJump"));
+            playerAnimator.SetBool("PlayerRun", false);
+            playerAnimator.SetBool("PlayerClimb", false);
             playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
@@ -104,7 +107,7 @@ public class Controller : MonoBehaviour
 
     private void ClimbingOnLadders()
     {
-        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Climbing tilemap")))
         {
             if (Mathf.Abs(playerRB.velocity.y) > Mathf.Epsilon)
             {
@@ -124,13 +127,12 @@ public class Controller : MonoBehaviour
         }
     }
 
-
-    //just in case another way to desable player movement, can freely delete method below
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Enemy")
-    //    {
-    //        OnDisable();
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground tilemap")))
+        {
+            //playerAnimator.SetTrigger("Jump");
+            playerAnimator.ResetTrigger("Jump");
+        }
+    }
 }

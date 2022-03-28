@@ -18,8 +18,8 @@ TagManager:
   - Bounce tileman
   - Ground tilemap
   - Background tilemap
-  - Climbing
-  - Hazards
+  - Climbing tilemap
+  - Hazards tilemap
   - Enemy
   - Player
   - Bullet

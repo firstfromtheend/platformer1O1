@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32269b01188ca84d95be9f3ac1c34a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 5
-  moveSpeed: 10
+  jumpForce: 10
+  moveSpeed: 7
   playerBullet: {fileID: 6120727786198225571, guid: fe6674c70ee704e4694ce079f4ef5fff, type: 3}
   gun: {fileID: 8979736603153710912}
 --- !u!61 &1645955361430276741
