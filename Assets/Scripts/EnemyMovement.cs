@@ -32,4 +32,15 @@ public class EnemyMovement : MonoBehaviour
             enemyMovementSpeed = -enemyMovementSpeed;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("asd");
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            enemyMovementSpeed = -enemyMovementSpeed;
+            Debug.Log("asd");
+        }
+    }
 }

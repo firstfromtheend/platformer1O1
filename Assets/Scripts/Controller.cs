@@ -61,12 +61,11 @@ public class Controller : MonoBehaviour
 
     private void TriggerPlayerdeath()
     {
-        if (playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")) || playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Hazards")))
+        if (playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")) 
+            || playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Hazards tilemap")))
         {
             playerController.Player.Disable();
             playerAnimator.SetTrigger("Die");
-            //OnDisable();
-            //Debug.Log("gg wp");
         }
     }
 
@@ -83,10 +82,6 @@ public class Controller : MonoBehaviour
     {
         if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground tilemap")))
         {
-            playerAnimator.SetTrigger("Jump");
-            //playerAnimator.SetBool("PlayerJump", !playerAnimator.GetBool("PlayerJump"));
-            playerAnimator.SetBool("PlayerRun", false);
-            playerAnimator.SetBool("PlayerClimb", false);
             playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
@@ -124,15 +119,6 @@ public class Controller : MonoBehaviour
         else
         {
             playerRB.gravityScale = defaultGravityScale;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (footBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground tilemap")))
-        {
-            //playerAnimator.SetTrigger("Jump");
-            playerAnimator.ResetTrigger("Jump");
         }
     }
 }
